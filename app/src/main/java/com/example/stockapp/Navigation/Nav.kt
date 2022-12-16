@@ -46,9 +46,6 @@ fun Nav() {
 
         composable("Stocks"){
 
-          //  com.example.stockapp.ui.theme.BottomNavigation()
-
-
             Column (
                 modifier = Modifier
                     .fillMaxSize()
@@ -87,6 +84,8 @@ fun Nav() {
                            backgroundColor = colorResource(id = R.color.pink)
 
                         ) {
+
+
                             BottomNavigationItem(selected = bottomState == "Stocks" ,
                                 onClick = { bottomState = "Stocks"},
                                 label = { Text(text = "Stocks")},
@@ -121,6 +120,11 @@ fun Nav() {
                                 },
 
                                 )
+
+//                            when(bottomState){
+//
+//                              "Scan" ->
+                           // }
 
                         }
 
