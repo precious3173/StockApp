@@ -1,74 +1,54 @@
 package com.example.stockapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.res.fontResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.stockapp.Navigation.Nav
+import com.example.stockapp.ui.theme.StockAppTheme
 import kotlinx.coroutines.delay
 
-
-class SplashScreen : ComponentActivity() {
+class StartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
 
-            Nav()
+            val navController = rememberNavController()
+            StartScreen()
+        }
 
-
-            var animation by remember {
-
-                mutableStateOf(false)
-            }
-            var anime = animateFloatAsState(
-                targetValue = if(animation) 1f else 0f,
-                 animationSpec = tween(
-                     durationMillis = 5000
-                 )
-                )
-
-            }
         }
     }
-
-
 @Composable
-fun SplashScreens(navController: NavHostController){
+fun StartScreen() {
 
-
+    val context = LocalContext.current
     LaunchedEffect(key1 = true){
 
         delay(3000L)
 
-        navController.navigate("Stocks"){
-           // popUpTo("home")
-        }
+       context.startActivity(Intent(context, BottomScreen::class.java))
     }
     Column(
         modifier = Modifier
@@ -77,7 +57,7 @@ fun SplashScreens(navController: NavHostController){
         verticalArrangement =  Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
+        ) {
 
         Text(text = "Inventory Manager", fontWeight = FontWeight.Bold,
             fontSize = 35.sp,color = Color.White, fontFamily = FontFamily.Cursive,
@@ -90,17 +70,8 @@ fun SplashScreens(navController: NavHostController){
             modifier = Modifier
                 .width(200.dp)
                 .height(200.dp))
-        
+
 
     }
 }
-
-@Composable
-@Preview
-fun SplashScreenPreview(){
-    SplashScreen()
-}
-
-
-
 

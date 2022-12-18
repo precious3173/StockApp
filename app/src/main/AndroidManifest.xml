@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,15 +15,24 @@
         android:theme="@style/Theme.StockApp"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreen"
+            android:name=".StartActivity"
             android:exported="true"
-            android:label="@string/title_activity_splash_screen"
-            android:theme="@style/Theme.Design.NoActionBar">
+            android:label="@string/title_activity_start"
+            android:theme="@style/Theme.StockApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".BottomScreen"
+            android:exported="false"
+            android:label="@string/title_activity_splash_screen"
+            android:theme="@style/Theme.Design.NoActionBar">
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -30,7 +41,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
