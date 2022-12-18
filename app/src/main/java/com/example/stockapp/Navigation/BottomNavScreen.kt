@@ -6,6 +6,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
@@ -16,7 +17,7 @@ import com.example.stockapp.R
 fun BottomNavScreen (navController: NavController) {
 
     BottomNavigation(
-        backgroundColor = colorResource(id = R.color.pink)
+        backgroundColor = colorResource(id = R.color.white)
 
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -30,7 +31,8 @@ fun BottomNavScreen (navController: NavController) {
             icon = {
                 Icon(
                     painterResource(R.drawable.ic_baseline_inventory_24),
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = Color.Magenta
                 )
             },
 
@@ -41,7 +43,9 @@ fun BottomNavScreen (navController: NavController) {
             label = { Text(text = "Scan") },
             icon = { Icon(
                 painterResource( id = R.drawable.ic_baseline_qr_code_scanner_24),
-                contentDescription = null)
+                contentDescription = null,
+                tint = Color.Magenta)
+
             }
 
 
@@ -51,7 +55,8 @@ fun BottomNavScreen (navController: NavController) {
             label = { Text(text = "Reports") },
             icon = { Icon(
                 painterResource( id = R.drawable.ic_baseline_bar_chart_24),
-                contentDescription = null)
+                contentDescription = null,
+                tint = Color.Magenta)
             },
 
             )
@@ -61,10 +66,13 @@ fun BottomNavScreen (navController: NavController) {
             label = { Text(text = "Settings") },
             icon = { Icon(
                 painterResource( R.drawable.ic_baseline_settings_24),
-                contentDescription = null)
+                contentDescription = null,
+                tint = Color.Magenta)
             },
 
             )
+
+
 
     }
 
