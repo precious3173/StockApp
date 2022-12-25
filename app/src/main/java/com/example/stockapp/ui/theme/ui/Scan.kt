@@ -18,6 +18,8 @@ import com.example.stockapp.R
 
 @Composable
 fun Scan () {
+
+    ActivateCamera()
     var text by remember {
         mutableStateOf(TextFieldValue(""))
     }
@@ -62,10 +64,30 @@ fun Scan () {
                 placeholder = { Text(text = "Enter Stock Location")},
                 modifier = Modifier.padding(15.dp)
             )
-            Button(onClick = { /*TODO*/ }, shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)) {
+            OutlinedTextField(value = text,
+
+                onValueChange = {
+                        newText ->
+                    text = newText
+
+
+                },
+
+                label = {Text(text = "Barcode Number")},
+                placeholder = { Text(text = "Barcode Number")},
+                modifier = Modifier.padding(15.dp)
+            )
+            Button(onClick = {
+
+
+
+            }, shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)) {
                 Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
-                modifier = Modifier.size(20.dp).height(15.dp).padding(15.dp))
-                Text(text = "Scan Barcode of Stock", Modifier.padding(start = 20.dp))
+                modifier = Modifier
+                    .size(20.dp)
+                    .height(15.dp)
+                    .padding(15.dp))
+                Text(text = "Scan Stock Barcode", Modifier.padding(start = 20.dp))
 
 
             }
