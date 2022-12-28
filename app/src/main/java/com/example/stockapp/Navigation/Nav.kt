@@ -43,6 +43,7 @@ import com.example.stockapp.ui.theme.BarScanner
 import com.example.stockapp.ui.theme.Reports
 import com.example.stockapp.ui.theme.Scan
 import com.example.stockapp.ui.theme.Stock
+import com.example.stockapp.ui.theme.ui.BarCodeScreen
 import com.example.stockapp.ui.theme.ui.Settings
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
@@ -64,7 +65,7 @@ fun Nav(navController: NavHostController) {
         }
 
         composable("Scan"){
-            Scan()
+            Scan(navController)
 
             }
 
@@ -76,6 +77,10 @@ fun Nav(navController: NavHostController) {
         composable("Settings"){
             Settings()
 
+        }
+
+        composable("BarCodeScreen"){
+            BarCodeScreen()
         }
         }
 

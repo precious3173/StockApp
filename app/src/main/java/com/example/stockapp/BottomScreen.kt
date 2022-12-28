@@ -22,6 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.stockapp.Navigation.BottomNavScreen
 import com.example.stockapp.Navigation.Nav
+import com.example.stockapp.ui.theme.Scan
 import com.example.stockapp.ui.theme.StockAppTheme
 import kotlinx.coroutines.delay
 
@@ -29,12 +30,16 @@ import kotlinx.coroutines.delay
 class BottomScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContent {
 
-            StockAppTheme() {
+            StockAppTheme {
 
 
              val navController = rememberNavController()
+
+                Scan(navController)
             androidx.compose.material.Surface(){
 
                 Scaffold(bottomBar = {
