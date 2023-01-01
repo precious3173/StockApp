@@ -44,6 +44,7 @@ import com.example.stockapp.ui.theme.BarScanner
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.Executors
 
 
 @Composable
@@ -52,6 +53,7 @@ fun BarCodeScreen (){
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
+
 
     val preview = Preview.Builder()
         .build()
@@ -66,7 +68,7 @@ fun BarCodeScreen (){
         val cameraProvider = cameraProviderFuture.get()
         val imageCapture  = ImageCapture.Builder().build()
 
-        val cameraExecutor = ContextCompat.getMainExecutor(context)
+        val cameraExecutor = Executors.newSingleThreadExecutor()
 
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
 

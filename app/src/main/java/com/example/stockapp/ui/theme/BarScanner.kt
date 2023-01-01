@@ -3,6 +3,7 @@ package com.example.stockapp.ui.theme
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.util.SparseIntArray
 import android.view.Surface
@@ -11,6 +12,7 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
+import com.example.stockapp.BottomScreen
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
@@ -70,7 +72,8 @@ class BarScanner(context: Context): ImageAnalysis.Analyzer {
                   barcode?.rawValue?.let {
                           code ->
 
-                      Toast.makeText(context, code, Toast.LENGTH_SHORT).show()
+                      Toast.makeText(context, code, Toast.LENGTH_LONG).show()
+
 
                   }
 
