@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
 import android.content.pm.PackageManager
+import android.os.Build
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -39,7 +41,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.stockapp.R
 import com.example.stockapp.ui.theme.BarScanner
-import com.example.stockapp.ui.theme.Camera
+import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @Composable
@@ -55,21 +59,20 @@ fun BarCodeScreen (){
     val previewView = remember {
         PreviewView(context)
     }
+
+
     cameraProviderFuture.addListener({
 
         val cameraProvider = cameraProviderFuture.get()
-
         val imageCapture  = ImageCapture.Builder().build()
 
         val cameraExecutor = ContextCompat.getMainExecutor(context)
 
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
 
-            it.setAnalyzer(cameraExecutor, BarScanner())
+            it.setAnalyzer(cameraExecutor, BarScanner(context))
 
         }
-
-
 
 
         val cameraSelector = CameraSelector.Builder()
@@ -94,7 +97,7 @@ fun BarCodeScreen (){
         AndroidView({previewView}, modifier = Modifier.fillMaxSize())
 
         IconButton(
-            modifier = Modifier.padding(bottom = 50.dp),
+            modifier = Modifier.padding(bottom = 80.dp),
             onClick = {
 
 
@@ -103,10 +106,10 @@ fun BarCodeScreen (){
             content = {
                 Icon(
                     painterResource(id = R.drawable.ic_baseline_camera_alt_24),
-                    contentDescription = "Take picture",
-                    tint = Color.White,
+                    contentDescription = "",
+                    tint = Color.Magenta,
                     modifier = Modifier
-                        .size(60.dp)
+                        .size(80.dp)
                         .padding(1.dp)
                         .border(10.dp, Color.White, CircleShape)
                 )
@@ -117,6 +120,42 @@ fun BarCodeScreen (){
 
     }
 }
+
+//fun ScanBarCode (
+//    imageCapture: ImageCapture,
+//c){
+//
+//    val name = SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
+//        .format(System.currentTimeMillis())
+//
+//    val contentValues = ContentValues().apply {
+//        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+//        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+//            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+//        }
+//    }
+//
+//
+//  val photoFile = File("/sdcard/sample.jpg")
+//
+//    val outputFileOptions = ImageCapture.OutputFileOptions.Builder(contentResolver,
+//        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//        contentValues).build()
+//
+//
+//    imageCapture.takePicture(outputFileOptions, cameraExecutor,
+//        object : ImageCapture.OnImageSavedCallback {
+//            override fun onError(error: ImageCaptureException)
+//            {
+//             Toast.makeText(context, error.message, Toast.LENGTH_SHORT)
+//            }
+//            override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+//                val savedUri = Uri.fromFile(File("/sdcard/sample.jpg"))
+//                CapturedImage(savedUri)
+//            }
+//        })
+//}
 
 
 

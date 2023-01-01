@@ -9,13 +9,22 @@ import android.view.Surface
 import android.widget.Toast
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.rememberNavController
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
-class BarScanner: ImageAnalysis.Analyzer {
+class BarScanner(context: Context): ImageAnalysis.Analyzer {
+
+    var context: Context? = null
+
+    init {
+
+        this.context = context
+    }
 
     val options = BarcodeScannerOptions.Builder()
         .setBarcodeFormats(
@@ -40,6 +49,9 @@ class BarScanner: ImageAnalysis.Analyzer {
 
     @SuppressLint("UnsafeOptInUsageError")
     override fun analyze(imageproxy: ImageProxy) {
+
+
+
         val mediaImage = imageproxy.image
         if(mediaImage != null){
            val image = InputImage.fromMediaImage(
@@ -47,14 +59,28 @@ class BarScanner: ImageAnalysis.Analyzer {
            )
 
             scanner.process(image).addOnSuccessListener{
-                barcode ->
+                barcodes ->
 
+              for (barcode in barcodes){
+
+                  val bounds = barcode.boundingBox
+                  val corners = barcode.cornerPoints
+
+
+                  barcode?.rawValue?.let {
+                          code ->
+
+                      Toast.makeText(context, code, Toast.LENGTH_SHORT).show()
+
+                  }
+
+              }
 
 
             }.addOnFailureListener{
                 exception ->
 
-                Log.e(TAG,"Error: " + exception.message )
+                Toast.makeText(context,"Error: " + exception.message, Toast.LENGTH_SHORT ).show()
 
             }.addOnCompleteListener{
 
@@ -65,4 +91,11 @@ class BarScanner: ImageAnalysis.Analyzer {
     }
 
 }
+
+interface scanCode{
+    fun setText(code: String){
+
+    }
+}
+
 

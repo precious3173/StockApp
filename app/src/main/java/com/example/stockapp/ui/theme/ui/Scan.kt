@@ -56,7 +56,6 @@ fun Scan (navController: NavController) {
 //                isgranted ->
 //            if (isgranted){
 //                Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
-//                navController.navigate("Camera")
 //            }
 //            else{
 //                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
@@ -68,10 +67,7 @@ fun Scan (navController: NavController) {
 //    LaunchedEffect(key1 = true){
 //        activityResultLauncher.launch(Manifest.permission.CAMERA)
 //    }
-
-    val fileFormat = "yyyy-MM-dd-HH-mm-ss-SSS"
-
-
+//
 
 
     var text by remember {
@@ -129,7 +125,7 @@ fun Scan (navController: NavController) {
 
                 label = {Text(text = "Barcode Number")},
                 placeholder = { Text(text = "Barcode Number")},
-                modifier = Modifier.padding(15.dp)
+                modifier = Modifier.padding(15.dp),
             )
             Button(
 
@@ -163,36 +159,7 @@ fun Scan (navController: NavController) {
 //) {
 //
 //
-//    val name = SimpleDateFormat( "yyyy-MM-dd-HH-mm-ss-SSS", Locale.US)
-//        .format(System.currentTimeMillis())
 //
-//    val contentValues = ContentValues().apply {
-//        put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-//        put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-//            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
-//        }
-//    }
-//
-
-//  val photoFile = File("/sdcard/sample.jpg")
-//
-//    val outputFileOptions = ImageCapture.OutputFileOptions.Builder(contentResolver,
-//        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-//        contentValues).build()
-//
-//
-//    imageCapture.takePicture(outputFileOptions, cameraExecutor,
-//        object : ImageCapture.OnImageSavedCallback {
-//            override fun onError(error: ImageCaptureException)
-//            {
-//             Toast.makeText(context, error.message, Toast.LENGTH_SHORT)
-//            }
-//            override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-//                val savedUri = Uri.fromFile(File("/sdcard/sample.jpg"))
-//                CapturedImage(savedUri)
-//            }
-//        })
 //}
 
 
