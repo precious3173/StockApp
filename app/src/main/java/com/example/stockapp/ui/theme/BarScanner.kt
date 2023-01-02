@@ -10,8 +10,11 @@ import android.view.Surface
 import android.widget.Toast
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.stockapp.BottomScreen
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -19,13 +22,17 @@ import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
 
-class BarScanner(context: Context): ImageAnalysis.Analyzer {
+
+class BarScanner(context: Context, navController: NavController): ImageAnalysis.Analyzer {
 
     var context: Context? = null
+
 
     init {
 
         this.context = context
+
+
     }
 
     val options = BarcodeScannerOptions.Builder()

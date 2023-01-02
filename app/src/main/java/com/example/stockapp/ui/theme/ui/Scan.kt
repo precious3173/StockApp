@@ -131,7 +131,7 @@ fun Scan (navController: NavController) {
 
                 onClick =  {
 
-                    navController.navigate("BarCodeScreen")
+                    navController.navigate("BarCodeScreen" + "/$navController")
 
             }, shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)) {
                 Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",

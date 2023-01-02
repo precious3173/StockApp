@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import com.example.stockapp.R
 import com.example.stockapp.ui.theme.BarScanner
 import java.io.File
@@ -48,7 +49,7 @@ import java.util.concurrent.Executors
 
 
 @Composable
-fun BarCodeScreen (){
+fun BarCodeScreen (navController: NavController){
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -72,7 +73,7 @@ fun BarCodeScreen (){
 
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
 
-            it.setAnalyzer(cameraExecutor, BarScanner(context))
+            it.setAnalyzer(cameraExecutor, BarScanner(context, navController))
 
         }
 
