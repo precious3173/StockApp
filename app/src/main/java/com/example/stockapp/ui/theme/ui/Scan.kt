@@ -146,21 +146,21 @@ fun Scan (navController: NavController) {
 
 
         }
+        Button(onClick = { },
+
+            shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
+            ) {
+
+            Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
+                modifier = Modifier
+                    .size(20.dp)
+                    .height(15.dp)
+                    .padding(15.dp))
+            Text(text = "Add Stock", Modifier.padding(start = 20.dp))
+        }
 
     }
 }
-
-//fun onClick(
-//    imageCapture: ImageCapture,
-//    cameraExecutor: Executor,
-//    context: Context,
-//    CapturedImage: (Uri) -> Unit
-//
-//) {
-//
-//
-//
-//}
 
 
 fun RequestCamera(context: Context) =
