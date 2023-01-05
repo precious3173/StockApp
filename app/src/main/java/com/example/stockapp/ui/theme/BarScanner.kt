@@ -26,12 +26,13 @@ import com.google.mlkit.vision.common.InputImage
 class BarScanner(context: Context, navController: NavController): ImageAnalysis.Analyzer {
 
     var context: Context? = null
+    var navController: NavController? = null
 
 
     init {
 
         this.context = context
-
+        this.navController = navController
 
     }
 
@@ -81,8 +82,11 @@ class BarScanner(context: Context, navController: NavController): ImageAnalysis.
 
                       Toast.makeText(context, code, Toast.LENGTH_LONG).show()
 
+                      navController!!.navigate("Scan")
 
                   }
+
+
 
               }
 

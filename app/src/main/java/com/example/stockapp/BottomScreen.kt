@@ -24,6 +24,7 @@ import com.example.stockapp.Navigation.BottomNavScreen
 import com.example.stockapp.Navigation.Nav
 import com.example.stockapp.ui.theme.Scan
 import com.example.stockapp.ui.theme.StockAppTheme
+import com.example.stockapp.ui.theme.ui.BarCodeScreen
 import kotlinx.coroutines.delay
 
 
@@ -38,6 +39,7 @@ class BottomScreen : ComponentActivity() {
 
 
              val navController = rememberNavController()
+
 
                 Scan(navController)
             androidx.compose.material.Surface(){

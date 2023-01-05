@@ -67,7 +67,7 @@ fun Scan (navController: NavController) {
 //    LaunchedEffect(key1 = true){
 //        activityResultLauncher.launch(Manifest.permission.CAMERA)
 //    }
-//
+
 
 
     var text by remember {
@@ -131,7 +131,7 @@ fun Scan (navController: NavController) {
 
                 onClick =  {
 
-                    navController.navigate("BarCodeScreen" + "/$navController")
+                    navController.navigate("BarCodeScreen")
 
             }, shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)) {
                 Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
