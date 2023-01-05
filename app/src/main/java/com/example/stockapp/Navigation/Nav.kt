@@ -62,9 +62,9 @@ fun Nav(navController: NavHostController) {
 
         }
 
-        composable("Scan/{Code}"){
+        composable("Scan/{code}"){
 
-            val getvalue = it.arguments?.getString("Code" )
+            val getvalue = it.arguments?.getString("code" )
              Scan(navController, code = getvalue)
 
             }

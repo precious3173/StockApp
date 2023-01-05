@@ -38,8 +38,8 @@ fun BottomNavScreen (navController: NavController) {
 
             )
 
-        BottomNavigationItem(selected = currentDestination?.route == "Scan/Code" ,
-            onClick = { navController.navigate("Scan/Code")},
+        BottomNavigationItem(selected = currentDestination?.route == "Scan/code" ,
+            onClick = { navController.navigate("Scan/code")},
             label = { Text(text = "Scan") },
             icon = { Icon(
                 painterResource( id = R.drawable.ic_baseline_qr_code_scanner_24),

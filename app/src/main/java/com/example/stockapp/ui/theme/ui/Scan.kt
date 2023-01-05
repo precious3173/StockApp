@@ -123,7 +123,7 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 },
 
-                label = {Text(text = "Barcode Number")},
+                label = {Text(text = code!!)},
                 placeholder = { Text(text = code!!)},
                 modifier = Modifier.padding(15.dp),
             )
@@ -133,7 +133,9 @@ fun Scan (navController: NavController, code: String? = null) {
 
                     navController.navigate("BarCodeScreen")
 
-            }, shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)) {
+            }, shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta))
+
+            {
                 Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
                 modifier = Modifier
                     .size(20.dp)
@@ -143,20 +145,21 @@ fun Scan (navController: NavController, code: String? = null) {
 
 
             }
+            Button(onClick = { },
 
-
-        }
-        Button(onClick = { },
-
-            shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
+                shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
             ) {
 
-            Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
-                modifier = Modifier
-                    .size(20.dp)
-                    .height(15.dp)
-                    .padding(15.dp))
-            Text(text = "Add Stock", Modifier.padding(start = 20.dp))
+                Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
+                    modifier = Modifier
+                        .size(20.dp)
+                        .height(15.dp)
+                        .padding(15.dp))
+                Text(text = "Add Stock", Modifier.padding(start = 20.dp))
+            }
+
+
+
         }
 
     }
