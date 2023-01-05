@@ -31,9 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
-import androidx.navigation.NavHostController
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -64,8 +62,10 @@ fun Nav(navController: NavHostController) {
 
         }
 
-        composable("Scan"){
-            Scan(navController)
+        composable("Scan/{Code}"){
+
+            val getvalue = it.arguments?.getString("Code" )
+             Scan(navController, code = getvalue)
 
             }
 

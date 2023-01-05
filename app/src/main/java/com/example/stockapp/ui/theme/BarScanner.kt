@@ -12,9 +12,11 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavArgument
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navArgument
 import com.example.stockapp.BottomScreen
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -82,7 +84,8 @@ class BarScanner(context: Context, navController: NavController): ImageAnalysis.
 
                       Toast.makeText(context, code, Toast.LENGTH_LONG).show()
 
-                      navController!!.navigate("Scan")
+                      navController!!.navigate("Scan/$code")
+
 
                   }
 

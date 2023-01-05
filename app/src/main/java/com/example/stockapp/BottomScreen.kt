@@ -41,7 +41,7 @@ class BottomScreen : ComponentActivity() {
              val navController = rememberNavController()
 
 
-                Scan(navController)
+                //Scan(navController)
             androidx.compose.material.Surface(){
 
                 Scaffold(bottomBar = {

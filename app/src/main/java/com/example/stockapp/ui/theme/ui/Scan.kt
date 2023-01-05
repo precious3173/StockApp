@@ -45,7 +45,7 @@ import java.util.concurrent.Executor
 
 
 @Composable
-fun Scan (navController: NavController) {
+fun Scan (navController: NavController, code: String? = null) {
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -124,7 +124,7 @@ fun Scan (navController: NavController) {
                 },
 
                 label = {Text(text = "Barcode Number")},
-                placeholder = { Text(text = "Barcode Number")},
+                placeholder = { Text(text = code!!)},
                 modifier = Modifier.padding(15.dp),
             )
             Button(
