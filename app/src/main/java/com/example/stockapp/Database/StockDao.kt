@@ -7,24 +7,18 @@ import kotlinx.coroutines.flow.Flow
 interface StockDao {
 
     @Insert
-    suspend fun insertStock(){
-
+    suspend fun insertStock(stockEntity: StockEntity){
     }
 
     @Delete
-    suspend fun deleteStock(){
-
-
+    suspend fun deleteStock(stockEntity: StockEntity){
     }
 
     @Update
-    suspend fun UpdateStock(){
-
-
+    suspend fun UpdateStock(stockEntity: StockEntity){
     }
 
-    @Query
-    fun getStock(){
-        Flow<StockEntity>
-    }
+    @Query("SELECT *FROM stock WHERE id = id")
+    fun getStock():Flow<List<StockEntity>>
+
 }
