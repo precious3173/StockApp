@@ -11,7 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun StockItem() {
@@ -30,9 +33,9 @@ fun StockItem() {
           verticalArrangement = Arrangement.Center,
           horizontalAlignment = Alignment.CenterHorizontally){
 
-              Text(text = "Stock name", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption)
-              Text(text = "Stock Location", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption)
-              Text(text = "Barcode Number", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption)
+              Text(text = "Stock name", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
+              Text(text = "Stock Location", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
+              Text(text = "Barcode Number", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
 
           }
 
