@@ -9,7 +9,6 @@ interface StockDao {
     @Insert
     suspend fun insertStock(){
 
-
     }
 
     @Delete
