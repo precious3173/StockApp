@@ -7,18 +7,16 @@ import javax.inject.Inject
 
 class StockRepositoryList @Inject constructor (private val stockDatabase: StockDatabase): StockRepository {
     override suspend fun insertStock(stockEntity: StockEntity) {
-        TODO("Not yet implemented")
+        stockDatabase.stockDao().insertStock(stockEntity)
     }
 
     override suspend fun deleteStock(stockEntity: StockEntity) {
-        TODO("Not yet implemented")
+        stockDatabase.stockDao().deleteStock(stockEntity)
     }
 
     override suspend fun UpdateStock(stockEntity: StockEntity) {
-        TODO("Not yet implemented")
+        stockDatabase.stockDao().UpdateStock(stockEntity)
     }
 
-    override fun getStock(): Flow<List<StockEntity>> {
-        TODO("Not yet implemented")
-    }
+    override fun getStock(): Flow<List<StockEntity>> = stockDatabase.stockDao().getStock()
 }
