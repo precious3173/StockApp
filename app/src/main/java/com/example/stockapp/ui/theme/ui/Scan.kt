@@ -96,11 +96,11 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 },
 
-                label = {Text(text = "Stock Name")},
-                placeholder = { Text(text = "Enter Stock Name")},
+                label = {Text(text = " ")},
+                placeholder = { Text(text = "Stock Name")},
                 modifier = Modifier.padding(15.dp)
                 )
-
+            Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(value = text,
 
                 onValueChange = {
@@ -110,10 +110,12 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 },
 
-                label = {Text(text = "Stock Location")},
-                placeholder = { Text(text = "Enter Stock Location")},
+                label = {Text(text = "")},
+                placeholder = { Text(text = "Stock Location")},
                 modifier = Modifier.padding(15.dp)
             )
+
+            Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(value = text,
 
                 onValueChange = {
@@ -124,9 +126,11 @@ fun Scan (navController: NavController, code: String? = null) {
                 },
 
                 label = {Text(text = code!!)},
-                placeholder = { Text(text = code!!)},
+                placeholder = { Text(text = "Barcode")},
                 modifier = Modifier.padding(15.dp),
             )
+            
+            Spacer(modifier = Modifier.height(10.dp))
             Button(
 
                 onClick =  {
