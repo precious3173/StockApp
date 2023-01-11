@@ -4,20 +4,14 @@ import com.example.stockapp.Database.StockDao
 import com.example.stockapp.Database.StockEntity
 import kotlinx.coroutines.flow.Flow
 
-class StockRepository: StockDao {
-    override suspend fun insertStock(stockEntity: StockEntity) {
-        super.insertStock(stockEntity)
-    }
+interface StockRepository {
 
-    override suspend fun deleteStock(stockEntity: StockEntity) {
-        super.deleteStock(stockEntity)
-    }
 
-    override suspend fun UpdateStock(stockEntity: StockEntity) {
-        super.UpdateStock(stockEntity)
-    }
+    suspend fun insertStock(stockEntity: StockEntity)
 
-    override fun getStock(): Flow<List<StockEntity>> {
-        TODO("Not yet implemented")
-    }
+    suspend fun deleteStock(stockEntity: StockEntity)
+
+    suspend fun UpdateStock(stockEntity: StockEntity)
+
+    fun getStock(): Flow<List<StockEntity>>
 }
