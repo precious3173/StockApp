@@ -49,7 +49,7 @@ fun Stock () {
                 .padding(10.dp) ){
 
                 items(listOfStocks){ item->
-                    StockItem()
+                    StockItem(item)
 
                 }
             }

@@ -17,9 +17,11 @@ import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stockapp.Database.StockEntity
+
 @Preview
 @Composable
-fun StockItem() {
+fun StockItem(stockEntity: StockEntity) {
     Card(modifier = Modifier
         .padding(8.dp, 4.dp)
         .fillMaxWidth()

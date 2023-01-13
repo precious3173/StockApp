@@ -72,7 +72,10 @@ fun Scan (navController: NavController, code: String? = null) {
 
 
 
-    var text by remember {
+    var stockLocationText by remember {
+        mutableStateOf(TextFieldValue(""))
+    }
+    var stockNameText by remember {
         mutableStateOf(TextFieldValue(""))
     }
 
@@ -89,11 +92,11 @@ fun Scan (navController: NavController, code: String? = null) {
 
 
             ) {
-            OutlinedTextField(value = text,
+            OutlinedTextField(value = stockNameText,
 
                 onValueChange = {
                     newText ->
-                    text = newText
+                    stockNameText = newText
 
 
                 },
@@ -103,11 +106,11 @@ fun Scan (navController: NavController, code: String? = null) {
                 modifier = Modifier.padding(15.dp)
                 )
             Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(value = text,
+            OutlinedTextField(value = stockLocationText,
 
                 onValueChange = {
                         newText ->
-                    text = newText
+                    stockLocationText = newText
 
 
                 },
@@ -118,17 +121,14 @@ fun Scan (navController: NavController, code: String? = null) {
             )
 
             Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(value = text,
+            OutlinedTextField(value = "",
 
                 onValueChange = {
-                        newText ->
-                    text = newText
-
-
-                },
+                                code
+                } ,
 
                 label = {Text(text = "Barcode")},
-                placeholder = { Text(text = code!!)},
+                placeholder = { Text(text = "Barcode")},
                 modifier = Modifier.padding(15.dp).focusable(enabled = false)
             )
             
