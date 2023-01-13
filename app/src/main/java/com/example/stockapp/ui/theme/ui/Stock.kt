@@ -16,15 +16,17 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockapp.Database.StockEntity
 import com.example.stockapp.Recyclerview.StockItem
 
-
+@Preview
 @Composable
 fun Stock () {
+    val listOfStocks = mutableListOf<StockEntity>()
     Box(modifier = Modifier.fillMaxSize()) {
 
         Column(
@@ -36,7 +38,7 @@ fun Stock () {
 
             Text(
                 text = "List of Stocks",
-                fontSize = 40.sp,
+                fontSize = 30.sp,
                 color = Color.Magenta,
                 style = TextStyle(fontWeight = FontWeight.Bold)
             )
@@ -46,10 +48,10 @@ fun Stock () {
                 .fillMaxSize()
                 .padding(10.dp) ){
 
-//                items(mutableListOf<StockEntity>()){ item->
-//                    StockItem()
-//
-//                }
+                items(listOfStocks){ item->
+                    StockItem()
+
+                }
             }
 
 

@@ -12,16 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+@Preview
 @Composable
 fun StockItem() {
     Card(modifier = Modifier
         .padding(8.dp, 4.dp)
         .fillMaxWidth()
-        .height(110.dp).background(color = Color.Magenta),
+        .height(150.dp).background(color = Color.Magenta),
     shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
     ) {
@@ -29,13 +31,13 @@ fun StockItem() {
           Column (
               Modifier
                   .padding(4.dp)
-                  .fillMaxSize(),
+                  .fillMaxSize().background(color = Color.Magenta),
           verticalArrangement = Arrangement.Center,
           horizontalAlignment = Alignment.CenterHorizontally){
 
-              Text(text = "Stock name", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
-              Text(text = "Stock Location", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
-              Text(text = "Barcode Number", modifier = Modifier.background(color = Color.White).padding(10.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
+              Text(text = "Stock name", modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+              Text(text = "Stock Location", modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
+              Text(text = "Barcode Number", modifier = Modifier.padding(5.dp), style = MaterialTheme.typography.caption, fontSize = 18.sp)
 
           }
 
