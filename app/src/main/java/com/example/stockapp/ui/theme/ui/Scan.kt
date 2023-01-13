@@ -19,6 +19,8 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material.*
@@ -96,7 +98,7 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 },
 
-                label = {Text(text = " ")},
+                label = {Text(text = "Stock Name")},
                 placeholder = { Text(text = "Stock Name")},
                 modifier = Modifier.padding(15.dp)
                 )
@@ -110,7 +112,7 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 },
 
-                label = {Text(text = "")},
+                label = {Text(text = "Stock Location")},
                 placeholder = { Text(text = "Stock Location")},
                 modifier = Modifier.padding(15.dp)
             )
@@ -125,9 +127,9 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 },
 
-                label = {Text(text = code!!)},
-                placeholder = { Text(text = "Barcode")},
-                modifier = Modifier.padding(15.dp),
+                label = {Text(text = "Barcode")},
+                placeholder = { Text(text = code!!)},
+                modifier = Modifier.padding(15.dp).focusable(enabled = false)
             )
             
             Spacer(modifier = Modifier.height(10.dp))

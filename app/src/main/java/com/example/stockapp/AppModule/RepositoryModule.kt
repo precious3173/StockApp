@@ -7,10 +7,11 @@ import com.example.stockapp.Repository.StockRepositoryList
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(Singleton::class)
+@InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
 
