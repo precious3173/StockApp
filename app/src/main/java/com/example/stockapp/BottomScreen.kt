@@ -25,9 +25,11 @@ import com.example.stockapp.Navigation.Nav
 import com.example.stockapp.ui.theme.Scan
 import com.example.stockapp.ui.theme.StockAppTheme
 import com.example.stockapp.ui.theme.ui.BarCodeScreen
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
 
+@AndroidEntryPoint
 class BottomScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -31,12 +31,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.stockapp.R
+import com.example.stockapp.ViewModel.StockViewModel
 import com.example.stockapp.ui.theme.BarScanner
 import com.example.stockapp.ui.theme.Reports
 import com.example.stockapp.ui.theme.Scan

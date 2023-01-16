@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.stockapp.Database.StockEntity
 
-@Preview
+
 @Composable
 fun StockItem(stockEntity: StockEntity) {
     Card(modifier = Modifier

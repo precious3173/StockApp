@@ -35,9 +35,15 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.stockapp.Database.StockEntity
 import com.example.stockapp.R
+import com.example.stockapp.ViewModel.StockViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -49,8 +55,10 @@ import java.util.concurrent.Executor
 @Composable
 fun Scan (navController: NavController, code: String? = null) {
 
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
+    val stockModel= viewModel<StockViewModel>()
 
 //    val activityResultLauncher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.RequestPermission(),
@@ -129,7 +137,9 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 label = {Text(text = "Barcode")},
                 placeholder = { Text(text = "Barcode")},
-                modifier = Modifier.padding(15.dp).focusable(enabled = false)
+                modifier = Modifier
+                    .padding(15.dp)
+                    .focusable(enabled = false)
             )
             
             Spacer(modifier = Modifier.height(10.dp))
@@ -151,7 +161,14 @@ fun Scan (navController: NavController, code: String? = null) {
 
 
             }
-            Button(onClick = { },
+            Button(onClick = {
+
+         val addStock = StockEntity(0, stockLocationText.text.toString(), stockNameText.text.toString(), code!!.toString() )
+
+                 stockModel.insertStock(addStock)
+
+                navController.navigate("Stocks")
+            },
 
                 shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
             ) {
