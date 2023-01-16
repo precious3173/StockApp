@@ -53,12 +53,12 @@ import java.util.concurrent.Executor
 
 
 @Composable
-fun Scan (navController: NavController, code: String? = null) {
+fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel = hiltViewModel()) {
 
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    val stockModel= viewModel<StockViewModel>()
+//    val stockModel= viewModel<StockViewModel>()
 
 //    val activityResultLauncher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.RequestPermission(),
@@ -165,7 +165,7 @@ fun Scan (navController: NavController, code: String? = null) {
 
          val addStock = StockEntity(0, stockLocationText.text.toString(), stockNameText.text.toString(), code!!.toString() )
 
-                 stockModel.insertStock(addStock)
+                 stockViewModel.insertStock(addStock)
 
                 navController.navigate("Stocks")
             },
