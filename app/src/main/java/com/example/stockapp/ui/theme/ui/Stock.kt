@@ -19,13 +19,17 @@ import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockapp.Database.StockEntity
 import com.example.stockapp.Recyclerview.StockItem
+import com.example.stockapp.ViewModel.StockViewModel
 
 @Preview
 @Composable
 fun Stock () {
+
+    val stockViewModel: StockViewModel = hiltViewModel()
     val listOfStocks = mutableListOf<StockEntity>()
     Box(modifier = Modifier.fillMaxSize()) {
 

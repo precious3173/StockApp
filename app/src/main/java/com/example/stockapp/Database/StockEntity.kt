@@ -16,11 +16,11 @@ data class StockEntity(
     var id: Int = 0,
 
     @ColumnInfo(name = "stockLocation")
-    var stockLocation: String,
+    var stockLocation: String? = null,
 
     @ColumnInfo(name= "stockName")
-    var stockName: String,
+    var stockName: String? = null,
 
     @ColumnInfo(name = "barcode")
-    var barcode: String
+    var barcode: String? = null
 )

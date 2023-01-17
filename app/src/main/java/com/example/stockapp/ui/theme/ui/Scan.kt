@@ -54,13 +54,12 @@ import java.util.concurrent.Executor
 
 
 @Composable
-fun Scan (navController: NavController, code: String? = null) {
+fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel) {
 
-    val stockViewModel: StockViewModel = hiltViewModel()
-   val stockEntity: MutableList<StockEntity> = mutableListOf()
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-
+   // val stockUiState by StockViewModel.
 
 //    val activityResultLauncher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.RequestPermission(),
@@ -119,8 +118,8 @@ fun Scan (navController: NavController, code: String? = null) {
             OutlinedTextField(value = stockLocationText,
 
                 onValueChange = {
-                        newText ->
-                    stockLocationText = newText
+
+                    stockLocationText = it
 
 
                 },
@@ -169,6 +168,7 @@ fun Scan (navController: NavController, code: String? = null) {
                     Toast.makeText(context, "Field is empty", Toast.LENGTH_SHORT).show()
 
                 }else{
+
          stockViewModel.insertStock( StockEntity( stockLocation  = stockLocationText.toString(), stockName= stockNameText.toString(), barcode = code!!.toString() ))
 
             //     stockViewModel.insertStock(addStock)
