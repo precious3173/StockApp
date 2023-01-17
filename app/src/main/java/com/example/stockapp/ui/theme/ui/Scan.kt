@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -53,12 +54,13 @@ import java.util.concurrent.Executor
 
 
 @Composable
-fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel = hiltViewModel()) {
+fun Scan (navController: NavController, code: String? = null) {
 
-
+    val stockViewModel: StockViewModel = hiltViewModel()
+   val stockEntity: MutableList<StockEntity> = mutableListOf()
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-//    val stockModel= viewModel<StockViewModel>()
+
 
 //    val activityResultLauncher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.RequestPermission(),
@@ -163,11 +165,17 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
             }
             Button(onClick = {
 
-         val addStock = StockEntity(0, stockLocationText.text.toString(), stockNameText.text.toString(), code!!.toString() )
+                if(stockNameText.text.isEmpty() && stockLocationText.text.isEmpty()){
+                    Toast.makeText(context, "Field is empty", Toast.LENGTH_SHORT).show()
 
-                 stockViewModel.insertStock(addStock)
+                }else{
+         stockViewModel.insertStock( StockEntity( stockLocation  = stockLocationText.toString(), stockName= stockNameText.toString(), barcode = code!!.toString() ))
 
-                navController.navigate("Stocks")
+            //     stockViewModel.insertStock(addStock)
+
+
+                navController.navigate("Stocks")}
+
             },
 
                 shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)

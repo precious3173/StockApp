@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 @Entity(tableName = "Stock")
 data class StockEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    var id: Int = 0,
 
     @ColumnInfo(name = "stockLocation")
     var stockLocation: String,
