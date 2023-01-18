@@ -132,8 +132,7 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(value = "",
 
-                onValueChange = {
-                                code
+                onValueChange = { code
                 } ,
 
                 label = {Text(text = "Barcode")},
