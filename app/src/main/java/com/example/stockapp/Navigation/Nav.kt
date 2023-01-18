@@ -69,10 +69,8 @@ fun Nav(navController: NavHostController) {
         composable("Scan/{code}"){
 
             val getvalue = it.arguments?.getString("code" )
-            val parentEntry = remember(it) {
-                navController.getBackStackEntry("Parent")
-            }
-            val viewModel = hiltViewModel<StockViewModel>(parentEntry)
+
+            val viewModel = hiltViewModel<StockViewModel>()
              Scan(navController, code = getvalue, viewModel)
 
 

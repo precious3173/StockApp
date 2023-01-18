@@ -9,6 +9,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +32,7 @@ import com.example.stockapp.ViewModel.StockViewModel
 fun Stock () {
 
     val stockViewModel: StockViewModel = hiltViewModel()
-    val listOfStocks = mutableListOf<StockEntity>()
+    val stocks: List<StockEntity> by stockViewModel.getStock().collectAsState(listOf())
     Box(modifier = Modifier.fillMaxSize()) {
 
         Column(
@@ -52,7 +54,7 @@ fun Stock () {
                 .fillMaxSize()
                 .padding(10.dp) ){
 
-                items(listOfStocks){ item->
+                items(stocks){ item->
                     StockItem(item)
 
                 }

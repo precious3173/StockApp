@@ -17,15 +17,10 @@ import javax.inject.Inject
 @HiltViewModel
 class StockViewModel @Inject constructor(val stockRepository: StockRepository): ViewModel(){
 
-    val stockData = MutableStateFlow(StockEntity())
-    val state:StateFlow<StockEntity>
-    get() = stockData
+//    val stockData = MutableStateFlow(StockEntity())
+//    val state:StateFlow<StockEntity>
+//    get() = stockData
 
-    init {
-        viewModelScope.launch {
-
-        }
-    }
 
     fun insertStock(stockEntity: StockEntity) = viewModelScope.launch{
 
