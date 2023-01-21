@@ -32,6 +32,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -55,6 +56,10 @@ import java.util.jar.Manifest
 @Composable
 fun Nav(navController: NavHostController) {
 
+    val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current) {
+        "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
+    }
+
     NavHost(navController = navController,
         startDestination = "Stocks"
     ){
@@ -70,7 +75,9 @@ fun Nav(navController: NavHostController) {
 
             val getvalue = it.arguments?.getString("code" )
 
-            val viewModel = hiltViewModel<StockViewModel>()
+
+             var viewModel:StockViewModel = hiltViewModel(viewModelStoreOwner)
+
              Scan(navController, code = getvalue, viewModel)
 
 

@@ -3,6 +3,7 @@ package com.example.stockapp.ui.theme
 import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -30,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -37,6 +39,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -56,10 +59,21 @@ import java.util.concurrent.Executor
 @Composable
 fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel) {
 
+    val TAG = "Scan"
+   // val stockViewModel: StockViewModel = viewModel()
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-   // val stockUiState by StockViewModel.
+
+    val stockUiState by stockViewModel.stockData.collectAsState()
+
+    val composeView = LocalView.current
+    val activityViewModel = composeView.findViewTreeViewModelStoreOwner()?.let {
+        hiltViewModel<StockViewModel>(it)
+    }
+
+
+
 
 //    val activityResultLauncher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.RequestPermission(),
@@ -82,11 +96,18 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 
 
     var stockLocationText by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
     var stockNameText by remember {
-        mutableStateOf(TextFieldValue(""))
+        mutableStateOf("")
     }
+        var stockLocationTextString by remember {
+            mutableStateOf(stockUiState.stockLocation)
+        }
+    var stockNameTextString by remember {
+        mutableStateOf(stockUiState.stockName)
+    }
+
 
     Box(modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
@@ -107,6 +128,7 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
                     newText ->
                     stockNameText = newText
 
+                    stockNameTextString = stockNameText
 
                 },
 
@@ -120,6 +142,8 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
                 onValueChange = {
 
                     stockLocationText = it
+
+                    stockLocationTextString = stockLocationText;
 
 
                 },
@@ -163,17 +187,20 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
             }
             Button(onClick = {
 
-                if(stockNameText.text.isEmpty() && stockLocationText.text.isEmpty()){
-                    Toast.makeText(context, "Field is empty", Toast.LENGTH_SHORT).show()
+                if(!stockNameText.isEmpty() && !stockLocationText.isEmpty()){
 
+                    activityViewModel!!.insertStock( StockEntity( stockLocationTextString, stockName= stockNameTextString, barcode = "code"))
+
+                    Log.e(TAG, "Scan:stockLocationis $stockLocationTextString")
+                    Log.e(TAG, "Scan:stockLocationis $stockNameTextString")
+
+                    //     stockViewModel.insertStock(addStock)
+                    navController.navigate("Stocks")
                 }else{
 
-         stockViewModel.insertStock( StockEntity( stockLocation  = stockLocationText.toString(), stockName= stockNameText.toString(), barcode = code!!.toString() ))
+                    Toast.makeText(context, "Field is empty", Toast.LENGTH_SHORT).show()
 
-            //     stockViewModel.insertStock(addStock)
-
-
-                navController.navigate("Stocks")}
+                }
 
             },
 
