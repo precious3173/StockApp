@@ -57,20 +57,19 @@ import java.util.concurrent.Executor
 
 
 @Composable
-fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel) {
+fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel = hiltViewModel()) {
 
     val TAG = "Scan"
-   // val stockViewModel: StockViewModel = viewModel()
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-    val stockUiState by stockViewModel.stockData.collectAsState()
-
-    val composeView = LocalView.current
-    val activityViewModel = composeView.findViewTreeViewModelStoreOwner()?.let {
-        hiltViewModel<StockViewModel>(it)
-    }
+//    val stockUiState by stockViewModel.stockData.collectAsState()
+//
+//    val composeView = LocalView.current
+//    val activityViewModel = composeView.findViewTreeViewModelStoreOwner()?.let {
+//        hiltViewModel<StockViewModel>(it)
+//    }
 
 
 
@@ -99,14 +98,14 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
         mutableStateOf("")
     }
     var stockNameText by remember {
-        mutableStateOf("")
-    }
-        var stockLocationTextString by remember {
-            mutableStateOf(stockUiState.stockLocation)
-        }
-    var stockNameTextString by remember {
-        mutableStateOf(stockUiState.stockName)
-    }
+        mutableStateOf("") }
+
+//        var stockLocationTextString by remember {
+//            mutableStateOf(stockUiState.stockLocation)
+//        }
+//    var stockNameTextString by remember {
+//        mutableStateOf(stockUiState.stockName)
+//    }
 
 
     Box(modifier = Modifier.fillMaxSize(),
@@ -128,7 +127,6 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
                     newText ->
                     stockNameText = newText
 
-                    stockNameTextString = stockNameText
 
                 },
 
@@ -143,7 +141,6 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 
                     stockLocationText = it
 
-                    stockLocationTextString = stockLocationText;
 
 
                 },
@@ -189,13 +186,13 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 
                 if(!stockNameText.isEmpty() && !stockLocationText.isEmpty()){
 
-                    activityViewModel!!.insertStock( StockEntity( stockLocationTextString, stockName= stockNameTextString, barcode = "code"))
-
-                    Log.e(TAG, "Scan:stockLocationis $stockLocationTextString")
-                    Log.e(TAG, "Scan:stockLocationis $stockNameTextString")
+                    stockViewModel.insertStock( StockEntity( stockLocation = stockLocationText, stockName= stockNameText, barcode = "code"))
+//
+//                    Log.e(TAG, "Scan:stockLocationis $stockLocationTextString")
+//                    Log.e(TAG, "Scan:stockLocationis $stockNameTextString")
 
                     //     stockViewModel.insertStock(addStock)
-                    navController.navigate("Stocks")
+                    //navController.navigate("Stocks")
                 }else{
 
                     Toast.makeText(context, "Field is empty", Toast.LENGTH_SHORT).show()

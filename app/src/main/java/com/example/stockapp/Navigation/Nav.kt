@@ -76,9 +76,8 @@ fun Nav(navController: NavHostController) {
             val getvalue = it.arguments?.getString("code" )
 
 
-             var viewModel:StockViewModel = hiltViewModel(viewModelStoreOwner)
 
-             Scan(navController, code = getvalue, viewModel)
+             Scan(navController, code = getvalue)
 
 
             }

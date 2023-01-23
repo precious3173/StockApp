@@ -39,7 +39,7 @@ class BottomScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel: StockViewModel by viewModels()
+
 
         val LocalActivity = staticCompositionLocalOf<ComponentActivity> {
             error("LocalActivity is not present")

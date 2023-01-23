@@ -8,6 +8,7 @@ import com.example.stockapp.Repository.StockRepository
 import com.example.stockapp.Repository.StockRepositoryList
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,8 +20,8 @@ import javax.inject.Inject
 class StockViewModel @Inject constructor(val stockRepository: StockRepository): ViewModel(){
 
 
-        val stockData = MutableStateFlow(StockEntity("", "", ""))
-        val state: StateFlow<StockEntity> = stockData.asStateFlow()
+//        val stockData = MutableStateFlow(StockEntity(, "", ""))
+//        val state: StateFlow<StockEntity> = stockData.asStateFlow()
 
 
 
