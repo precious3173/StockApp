@@ -48,6 +48,9 @@ import com.example.stockapp.R
 import com.example.stockapp.ViewModel.StockViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -57,14 +60,16 @@ import java.util.concurrent.Executor
 
 
 @Composable
-fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel = hiltViewModel()) {
+fun Scan (navController: NavController, code: String? = null) {
+
+    val stockViewModel= hiltViewModel<StockViewModel>()
 
     val TAG = "Scan"
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-//    val stockUiState by stockViewModel.stockData.collectAsState()
+   val stockUiState by stockViewModel.stockData.collectAsState()
 //
 //    val composeView = LocalView.current
 //    val activityViewModel = composeView.findViewTreeViewModelStoreOwner()?.let {
@@ -95,11 +100,17 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 
 
     var stockLocationText by remember {
-        mutableStateOf("")
+        mutableStateOf(
+            stockUiState.stockLocation
+        )
     }
     var stockNameText by remember {
-        mutableStateOf("") }
+        mutableStateOf(stockUiState.stockName) }
 
+    var barcode by remember {
+
+       mutableStateOf(stockUiState.barcode)
+    }
 //        var stockLocationTextString by remember {
 //            mutableStateOf(stockUiState.stockLocation)
 //        }
@@ -186,8 +197,11 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 
                 if(!stockNameText.isEmpty() && !stockLocationText.isEmpty()){
 
-                    stockViewModel.insertStock( StockEntity( stockLocation = stockLocationText, stockName= stockNameText, barcode = "code"))
-//
+               GlobalScope.launch(Dispatchers.Main) {
+
+                   stockViewModel.insertStock( StockEntity( id = 0,stockLocation = stockLocationText, stockName= stockNameText, barcode = "code"))
+
+               }
 //                    Log.e(TAG, "Scan:stockLocationis $stockLocationTextString")
 //                    Log.e(TAG, "Scan:stockLocationis $stockNameTextString")
 
