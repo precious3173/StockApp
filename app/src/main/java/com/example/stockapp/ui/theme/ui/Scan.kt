@@ -44,6 +44,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.stockapp.Database.StockEntity
+import com.example.stockapp.Database.StockEvent
 import com.example.stockapp.R
 import com.example.stockapp.ViewModel.StockViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,9 +61,7 @@ import java.util.concurrent.Executor
 
 
 @Composable
-fun Scan (navController: NavController, code: String? = null) {
-
-    val stockViewModel= hiltViewModel<StockViewModel>()
+fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel = hiltViewModel()) {
 
     val TAG = "Scan"
 
@@ -101,15 +100,15 @@ fun Scan (navController: NavController, code: String? = null) {
 
     var stockLocationText by remember {
         mutableStateOf(
-            stockUiState.stockLocation
+            ""
         )
     }
     var stockNameText by remember {
-        mutableStateOf(stockUiState.stockName) }
+        mutableStateOf("") }
 
     var barcode by remember {
 
-       mutableStateOf(stockUiState.barcode)
+       mutableStateOf("")
     }
 //        var stockLocationTextString by remember {
 //            mutableStateOf(stockUiState.stockLocation)
@@ -197,15 +196,12 @@ fun Scan (navController: NavController, code: String? = null) {
 
                 if(!stockNameText.isEmpty() && !stockLocationText.isEmpty()){
 
-               GlobalScope.launch(Dispatchers.Main) {
 
-                   stockViewModel.insertStock( StockEntity( id = 0,stockLocation = stockLocationText, stockName= stockNameText, barcode = "code"))
 
-               }
-//                    Log.e(TAG, "Scan:stockLocationis $stockLocationTextString")
-//                    Log.e(TAG, "Scan:stockLocationis $stockNameTextString")
+                   //stockViewModel.onEvent(StockEvent.InsertStock( StockEntity(stockLocation = stockLocationText, stockName= stockNameText, barcode = "code")))
 
-                    //     stockViewModel.insertStock(addStock)
+                    stockViewModel.updateStock(StockEntity(stockLocation = stockLocationText, stockName= stockNameText, barcode = "code"))
+
                     //navController.navigate("Stocks")
                 }else{
 
