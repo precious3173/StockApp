@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
@@ -43,10 +44,10 @@ fun Stock () {
             ){
 
             Text(
-                text = "List of Stocks",
+                text = "Stocks",
                 fontSize = 30.sp,
                 color = Color.Magenta,
-                style = TextStyle(fontWeight = FontWeight.Bold)
+                style = TextStyle(fontWeight = FontWeight.Bold, fontFamily = FontFamily.Cursive)
             )
                Spacer(modifier = Modifier.height(10.dp))
 
