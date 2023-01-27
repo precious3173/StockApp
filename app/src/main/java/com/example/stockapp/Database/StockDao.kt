@@ -7,16 +7,13 @@ import kotlinx.coroutines.flow.Flow
 interface StockDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStock(stockEntity: StockEntity){
-    }
+    suspend fun insertStock(stockEntity: StockEntity)
 
     @Delete
-    suspend fun deleteStock(stockEntity: StockEntity){
-    }
+    suspend fun deleteStock(stockEntity: StockEntity)
 
     @Update
-    suspend fun UpdateStock(stockEntity: StockEntity){
-    }
+    suspend fun UpdateStock(stockEntity: StockEntity)
 
     @Query("SELECT *FROM stock")
     fun getStock():Flow<List<StockEntity>>

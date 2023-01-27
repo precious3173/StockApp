@@ -97,6 +97,7 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 //    }
 
 
+    /**
 
     var stockLocationText by remember {
         mutableStateOf(
@@ -110,6 +111,8 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 
        mutableStateOf("")
     }
+
+    */
 //        var stockLocationTextString by remember {
 //            mutableStateOf(stockUiState.stockLocation)
 //        }
@@ -118,110 +121,139 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 //    }
 
 
-    Box(modifier = Modifier.fillMaxSize(),
+
+    val stockNameText by stockViewModel.stockNameText.collectAsState()
+    val stockLocationText by stockViewModel.stockLocationText.collectAsState()
+    val barCode by stockViewModel.barCode.collectAsState()
+
+
+    Log.e(TAG, "Scan: the current value of location is $stockLocationText")
+    Log.e(TAG, "Scan: the current value of name is $stockNameText")
+    Log.e(TAG, "Scan: the current value of bar code is $barCode")
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
 
-    ) {
-        Column(  modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .background(Color.White),
-             verticalArrangement = Arrangement.Center,
-             horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(Color.White),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
 
 
-            ) {
-            OutlinedTextField(value = stockNameText,
+        ) {
+            OutlinedTextField(
+                value = stockNameText ?: "",
 
-                onValueChange = {
-                    newText ->
-                    stockNameText = newText
+                onValueChange = stockViewModel::onStockNameTextChange,
 
-
-                },
-
-                label = {Text(text = "Stock Name")},
-                placeholder = { Text(text = "Stock Name")},
+                label = { Text(text = "Stock Name") },
+                placeholder = { Text(text = "Stock Name") },
                 modifier = Modifier.padding(15.dp)
-                )
+            )
             Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(value = stockLocationText,
 
-                onValueChange = {
+            OutlinedTextField(
+                value = stockLocationText ?: "",
 
-                    stockLocationText = it
+                onValueChange = stockViewModel::onStockLocationTextChange,
 
-
-
-                },
-
-                label = {Text(text = "Stock Location")},
-                placeholder = { Text(text = "Stock Location")},
+                label = { Text(text = "Stock Location") },
+                placeholder = { Text(text = "Stock Location") },
                 modifier = Modifier.padding(15.dp)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(value = "",
+            OutlinedTextField(
+                value = barCode ?: "",
 
-                onValueChange = { code
-                } ,
+                onValueChange = stockViewModel::onBarCodeChange,
 
-                label = {Text(text = "Barcode")},
-                placeholder = { Text(text = "Barcode")},
+                label = { Text(text = "Barcode") },
+                placeholder = { Text(text = "Barcode") },
                 modifier = Modifier
                     .padding(15.dp)
                     .focusable(enabled = false)
             )
-            
+
             Spacer(modifier = Modifier.height(10.dp))
             Button(
 
-                onClick =  {
+                onClick = {
 
                     navController.navigate("BarCodeScreen")
 
-            }, shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta))
+                },
+                shape = CutCornerShape(10),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
+            )
 
             {
-                Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
-                modifier = Modifier
-                    .size(20.dp)
-                    .height(15.dp)
-                    .padding(15.dp))
+                Image(
+                    painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .size(20.dp)
+                        .height(15.dp)
+                        .padding(15.dp)
+                )
                 Text(text = "Scan Stock Barcode", Modifier.padding(start = 20.dp))
 
 
             }
-            Button(onClick = {
+            Button(
+                onClick = {
 
-                if(!stockNameText.isEmpty() && !stockLocationText.isEmpty()){
+                    if (stockNameText == null || stockNameText?.isBlank() == true) {
+                        Toast.makeText(context, "stockNameText is empty", Toast.LENGTH_SHORT).show()
+                        return@Button
+                    }
+
+                    if (stockLocationText == null || stockLocationText?.isBlank() == true) {
+                        Toast.makeText(context, "stockLocationText is empty", Toast.LENGTH_SHORT).show()
+                        return@Button
+                    }
+
+                    if (barCode == null || barCode?.isBlank() == true) {
+                        Toast.makeText(context, "barCode is empty", Toast.LENGTH_SHORT).show()
+                        return@Button
+                    }
 
 
+                    //stockViewModel.onEvent(StockEvent.InsertStock( StockEntity(stockLocation = stockLocationText, stockName= stockNameText, barcode = "code")))
 
-                   //stockViewModel.onEvent(StockEvent.InsertStock( StockEntity(stockLocation = stockLocationText, stockName= stockNameText, barcode = "code")))
+                    stockViewModel.insertStock(
+                        StockEntity(
+                            stockLocation = stockLocationText ?: "",
+                            stockName = stockNameText ?: "",
+                            barcode = barCode ?: ""
+                        )
+                    )
 
-                    stockViewModel.updateStock(StockEntity(stockLocation = stockLocationText, stockName= stockNameText, barcode = "code"))
+                    Toast.makeText(context, "added stock!", Toast.LENGTH_SHORT).show()
 
                     //navController.navigate("Stocks")
-                }else{
 
-                    Toast.makeText(context, "Field is empty", Toast.LENGTH_SHORT).show()
+                },
 
-                }
-
-            },
-
-                shape = CutCornerShape(10), colors =ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
+                shape = CutCornerShape(10),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Magenta)
             ) {
 
-                Image(painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24), contentDescription = "",
+                Image(
+                    painterResource(id = R.drawable.ic_baseline_qr_code_scanner_24),
+                    contentDescription = "",
                     modifier = Modifier
                         .size(20.dp)
                         .height(15.dp)
-                        .padding(15.dp))
+                        .padding(15.dp)
+                )
                 Text(text = "Add Stock", Modifier.padding(start = 20.dp))
             }
-
 
 
         }
