@@ -36,9 +36,30 @@ init {
 
     }
 
-
-
 }
+
+
+    private var _stockLocationText = MutableStateFlow(null as String?)
+    val stockLocationText: StateFlow<String?> = _stockLocationText
+
+    private var _stockNameText = MutableStateFlow(null as String?)
+    val stockNameText: StateFlow<String?> = _stockNameText
+
+    private var _barCode = MutableStateFlow(null as String?)
+    val barCode: StateFlow<String?> = _barCode
+
+
+    fun onStockLocationTextChange(location: String?) = viewModelScope.launch {
+        _stockLocationText.value = location
+    }
+
+    fun onStockNameTextChange(name: String?) = viewModelScope.launch {
+        _stockNameText.value = name
+    }
+
+    fun onBarCodeChange(barCode: String?) = viewModelScope.launch {
+        _barCode.value = barCode
+    }
 
   fun onEvent(event: StockEvent)
   {
@@ -69,6 +90,8 @@ init {
    fun getStock():Flow<List<StockEntity>> = stockRepository.getStock()
 
 
-
+    fun insertStock(stockEntity: StockEntity) = viewModelScope.launch {
+        stockRepository.insertStock(stockEntity)
+    }
 
 }
