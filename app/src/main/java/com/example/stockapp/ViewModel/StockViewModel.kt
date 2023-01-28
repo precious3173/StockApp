@@ -24,19 +24,19 @@ import javax.inject.Inject
 @HiltViewModel
 class StockViewModel @Inject constructor(val stockRepository: StockRepository): ViewModel(){
 
-
-        val stockData = MutableStateFlow(StockEntity(stockLocation = "", stockName = "", barcode = ""))
-        val state: StateFlow<StockEntity> = stockData.asStateFlow()
-
-init {
-
-    viewModelScope.launch(Dispatchers.IO){
-
-        stockRepository.insertStock(stockData.value)
-
-    }
-
-}
+//
+//       val stockData = MutableStateFlow(StockEntity(stockLocation = "", stockName = "", barcode = ""))
+//        val state: StateFlow<StockEntity> = stockData.asStateFlow()
+//
+//init {
+//
+//    viewModelScope.launch(Dispatchers.IO){
+//
+//        stockRepository.insertStock(stockData.value)
+//
+//    }
+//
+//}
 
 
     private var _stockLocationText = MutableStateFlow(null as String?)

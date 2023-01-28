@@ -68,16 +68,12 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-   val stockUiState by stockViewModel.stockData.collectAsState()
+  // val stockUiState by stockViewModel.stockData.collectAsState()
 //
 //    val composeView = LocalView.current
 //    val activityViewModel = composeView.findViewTreeViewModelStoreOwner()?.let {
 //        hiltViewModel<StockViewModel>(it)
 //    }
-
-
-
-
 //    val activityResultLauncher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.RequestPermission(),
 //        onResult ={

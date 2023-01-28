@@ -25,7 +25,7 @@ fun StockItem(stockEntity: StockEntity) {
     Card(modifier = Modifier
         .padding(8.dp, 4.dp)
         .fillMaxWidth()
-        .height(150.dp).background(color = Color.Magenta),
+        .height(150.dp).background(color = Color.DarkGray),
     shape = RoundedCornerShape(8.dp),
         elevation = 4.dp
     ) {
@@ -33,7 +33,7 @@ fun StockItem(stockEntity: StockEntity) {
           Column (
               Modifier
                   .padding(4.dp)
-                  .fillMaxSize().background(color = Color.Magenta),
+                  .fillMaxSize().background(color = Color.LightGray),
           verticalArrangement = Arrangement.Center,
           horizontalAlignment = Alignment.CenterHorizontally){
 
