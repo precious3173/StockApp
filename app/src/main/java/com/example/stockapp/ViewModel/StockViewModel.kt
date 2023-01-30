@@ -40,13 +40,13 @@ class StockViewModel @Inject constructor(val stockRepository: StockRepository): 
 
 
     private var _stockLocationText = MutableStateFlow(null as String?)
-    val stockLocationText: StateFlow<String?> = _stockLocationText
+    val stockLocationText: StateFlow<String?> = _stockLocationText.asStateFlow()
 
     private var _stockNameText = MutableStateFlow(null as String?)
-    val stockNameText: StateFlow<String?> = _stockNameText
+    val stockNameText: StateFlow<String?> = _stockNameText.asStateFlow()
 
     private var _barCode = MutableStateFlow(null as String?)
-    val barCode: StateFlow<String?> = _barCode
+    val barCode: StateFlow<String?> = _barCode.asStateFlow()
 
 
     fun onStockLocationTextChange(location: String?) = viewModelScope.launch {
@@ -61,21 +61,21 @@ class StockViewModel @Inject constructor(val stockRepository: StockRepository): 
         _barCode.value = barCode
     }
 
-  fun onEvent(event: StockEvent)
-  {
-      when(event){
-          is StockEvent.DeleteStock ->{
-              viewModelScope.launch {
-                  stockRepository.deleteStock(event.stockEntity)
-              }
-          }
-          is StockEvent.InsertStock ->{
-              viewModelScope.launch{
-                  stockRepository.insertStock(event.stockEntity)
-              }
-          }
-      }
-  }
+//  fun onEvent(event: StockEvent)
+//  {
+//      when(event){
+//          is StockEvent.DeleteStock ->{
+//              viewModelScope.launch {
+//                  stockRepository.deleteStock(event.stockEntity)
+//              }
+//          }
+//          is StockEvent.InsertStock ->{
+//              viewModelScope.launch{
+//                  stockRepository.insertStock(event.stockEntity)
+//              }
+//          }
+//      }
+//  }
 
     fun deleteStock (stockEntity: StockEntity) = viewModelScope.launch{
 
@@ -88,6 +88,7 @@ class StockViewModel @Inject constructor(val stockRepository: StockRepository): 
     }
 
    fun getStock():Flow<List<StockEntity>> = stockRepository.getStock()
+
 
 
     fun insertStock(stockEntity: StockEntity) = viewModelScope.launch {

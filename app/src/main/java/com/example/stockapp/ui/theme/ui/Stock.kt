@@ -56,7 +56,10 @@ fun Stock () {
                 .padding(10.dp) ){
 
                 items(stocks){ item->
-                    StockItem(item)
+                    Column() {
+                        StockItem(item)
+                    }
+
 
                 }
             }
