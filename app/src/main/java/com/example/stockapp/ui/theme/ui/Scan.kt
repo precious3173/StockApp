@@ -57,9 +57,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.Executor
 
-
-
-
 @Composable
 fun Scan (navController: NavController, code: String? = null, stockViewModel: StockViewModel = hiltViewModel()) {
 
@@ -68,53 +65,24 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
 
-  // val stockUiState by stockViewModel.stockData.collectAsState()
-//
-//    val composeView = LocalView.current
-//    val activityViewModel = composeView.findViewTreeViewModelStoreOwner()?.let {
-//        hiltViewModel<StockViewModel>(it)
-//    }
-//    val activityResultLauncher = rememberLauncherForActivityResult(
-//        contract = ActivityResultContracts.RequestPermission(),
-//        onResult ={
-//                isgranted ->
-//            if (isgranted){
-//                Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
-//            }
-//            else{
-//                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//    )
-//
-//
-//    LaunchedEffect(key1 = true){
-//        activityResultLauncher.launch(Manifest.permission.CAMERA)
-//    }
+
+    val activityResultLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult ={
+                isgranted ->
+            if (isgranted){
+                Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    )
 
 
-    /**
-
-    var stockLocationText by remember {
-        mutableStateOf(
-            ""
-        )
+    LaunchedEffect(key1 = true){
+        activityResultLauncher.launch(Manifest.permission.CAMERA)
     }
-    var stockNameText by remember {
-        mutableStateOf("") }
-
-    var barcode by remember {
-
-       mutableStateOf("")
-    }
-
-    */
-//        var stockLocationTextString by remember {
-//            mutableStateOf(stockUiState.stockLocation)
-//        }
-//    var stockNameTextString by remember {
-//        mutableStateOf(stockUiState.stockName)
-//    }
 
 
 
@@ -180,8 +148,19 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
             Button(
 
                 onClick = {
+                    when(PackageManager.PERMISSION_GRANTED){
+                        ContextCompat.checkSelfPermission(
+                            context, Manifest.permission.CAMERA
+                        ) ->{
 
-                    navController.navigate("BarCodeScreen")
+                            navController.navigate("BarCodeScreen")
+                        }
+                        else ->{
+                            activityResultLauncher.launch(Manifest.permission.CAMERA)
+                        }
+                    }
+
+
 
                 },
                 shape = CutCornerShape(10),

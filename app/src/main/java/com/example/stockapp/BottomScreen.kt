@@ -41,6 +41,7 @@ class BottomScreen : ComponentActivity() {
 
 
 
+
         val LocalActivity = staticCompositionLocalOf<ComponentActivity> {
             error("LocalActivity is not present")
         }
@@ -75,6 +76,8 @@ class BottomScreen : ComponentActivity() {
             }
         }
     }
+
+
 }
 
 
