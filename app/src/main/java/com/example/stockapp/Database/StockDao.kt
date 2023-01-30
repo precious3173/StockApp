@@ -15,7 +15,7 @@ interface StockDao {
     @Update
     suspend fun UpdateStock(stockEntity: StockEntity)
 
-    @Query("SELECT *FROM stock")
-    fun getStock():Flow<List<StockEntity>>
+    @Query("SELECT * FROM stock")
+    fun getStock(): List<StockEntity>
 
 }
