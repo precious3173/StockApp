@@ -133,7 +133,7 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 
             Spacer(modifier = Modifier.height(10.dp))
             OutlinedTextField(
-                value = barCode ?: "",
+                value = code.toString(),
 
                 onValueChange = stockViewModel::onBarCodeChange,
 
@@ -205,13 +205,13 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
                         StockEntity(
                             stockLocation = stockLocationText ?: "",
                             stockName = stockNameText ?: "",
-                            barcode = barCode ?: ""
+                            barcode = code.toString()
                         )
                     )
 
                     Toast.makeText(context, "added stock!", Toast.LENGTH_SHORT).show()
 
-                    //navController.navigate("Stocks")
+                    navController.navigate("Stocks")
 
                 },
 
@@ -237,9 +237,5 @@ fun Scan (navController: NavController, code: String? = null, stockViewModel: St
 }
 
 
-fun RequestCamera(context: Context) =
-        ContextCompat.checkSelfPermission(
-            context, Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
 
 
