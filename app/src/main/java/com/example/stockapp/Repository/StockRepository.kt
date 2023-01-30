@@ -13,5 +13,5 @@ interface StockRepository {
 
     suspend fun UpdateStock(stockEntity: StockEntity)
 
-    fun getStock(): Flow<List<StockEntity>>
+    fun getStock(): List<StockEntity>
 }

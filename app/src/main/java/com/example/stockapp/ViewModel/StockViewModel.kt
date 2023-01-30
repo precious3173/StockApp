@@ -1,5 +1,6 @@
 package com.example.stockapp.ViewModel
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
@@ -20,9 +21,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-
 @HiltViewModel
-class StockViewModel @Inject constructor(val stockRepository: StockRepository): ViewModel(){
+class StockViewModel @Inject constructor(val stockRepository: StockRepository) : ViewModel() {
 
 //
 //       val stockData = MutableStateFlow(StockEntity(stockLocation = "", stockName = "", barcode = ""))
@@ -40,13 +40,16 @@ class StockViewModel @Inject constructor(val stockRepository: StockRepository): 
 
 
     private var _stockLocationText = MutableStateFlow(null as String?)
-    val stockLocationText: StateFlow<String?> = _stockLocationText.asStateFlow()
+    val stockLocationText: StateFlow<String?> = _stockLocationText
 
     private var _stockNameText = MutableStateFlow(null as String?)
-    val stockNameText: StateFlow<String?> = _stockNameText.asStateFlow()
+    val stockNameText: StateFlow<String?> = _stockNameText
 
     private var _barCode = MutableStateFlow(null as String?)
-    val barCode: StateFlow<String?> = _barCode.asStateFlow()
+    val barCode: StateFlow<String?> = _barCode
+
+    private var _stocks = MutableStateFlow(emptyList<StockEntity>())
+    val stocks: StateFlow<List<StockEntity>> = _stocks
 
 
     fun onStockLocationTextChange(location: String?) = viewModelScope.launch {
@@ -61,38 +64,42 @@ class StockViewModel @Inject constructor(val stockRepository: StockRepository): 
         _barCode.value = barCode
     }
 
-//  fun onEvent(event: StockEvent)
-//  {
-//      when(event){
-//          is StockEvent.DeleteStock ->{
-//              viewModelScope.launch {
-//                  stockRepository.deleteStock(event.stockEntity)
-//              }
-//          }
-//          is StockEvent.InsertStock ->{
-//              viewModelScope.launch{
-//                  stockRepository.insertStock(event.stockEntity)
-//              }
-//          }
-//      }
-//  }
+    fun onEvent(event: StockEvent) {
+        when (event) {
+            is StockEvent.DeleteStock -> {
+                viewModelScope.launch {
+                    stockRepository.deleteStock(event.stockEntity)
+                }
+            }
+            is StockEvent.InsertStock -> {
+                viewModelScope.launch {
+                    stockRepository.insertStock(event.stockEntity)
+                }
+            }
+        }
+    }
 
-    fun deleteStock (stockEntity: StockEntity) = viewModelScope.launch{
+    fun deleteStock(stockEntity: StockEntity) = viewModelScope.launch {
 
         stockRepository.deleteStock(stockEntity)
     }
 
-    fun updateStock(stockEntity: StockEntity) = viewModelScope.launch{
+    fun updateStock(stockEntity: StockEntity) = viewModelScope.launch {
 
         stockRepository.UpdateStock(stockEntity)
     }
 
-   fun getStock():Flow<List<StockEntity>> = stockRepository.getStock()
-
+    fun getStock() = viewModelScope.launch {
+        _stocks.value = stockRepository.getStock()
+    }
 
 
     fun insertStock(stockEntity: StockEntity) = viewModelScope.launch {
         stockRepository.insertStock(stockEntity)
+        // on insert stock clear fields -- NOTE
+        _stockNameText.value = null
+        _stockLocationText.value = null
+        _barCode.value = null
     }
 
 }
