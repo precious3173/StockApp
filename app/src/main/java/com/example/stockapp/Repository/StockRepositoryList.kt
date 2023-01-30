@@ -18,5 +18,5 @@ class StockRepositoryList @Inject constructor (private val stockDatabase: StockD
         stockDatabase.stockDao().UpdateStock(stockEntity)
     }
 
-    override fun getStock(): Flow<List<StockEntity>> = stockDatabase.stockDao().getStock()
+    override fun getStock(): List<StockEntity> = stockDatabase.stockDao().getStock()
 }

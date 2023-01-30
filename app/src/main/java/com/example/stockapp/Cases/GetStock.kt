@@ -9,7 +9,7 @@ class GetStock @Inject constructor(
     private val repository: StockRepository
 ) {
 
-    operator fun invoke(): Flow<List<StockEntity>>{
+    operator fun invoke(): List<StockEntity>{
         return repository.getStock()
     }
 
