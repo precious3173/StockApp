@@ -6,10 +6,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -46,30 +50,32 @@ fun StartScreen() {
     val context = LocalContext.current
     LaunchedEffect(key1 = true){
 
-        delay(3000L)
+        delay(2000L)
 
        context.startActivity(Intent(context, BottomScreen::class.java))
     }
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Magenta),
+            .background(Color.White),
         verticalArrangement =  Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
 
         ) {
 
-        Text(text = "Inventory Manager", fontWeight = FontWeight.Bold,
-            fontSize = 35.sp,color = Color.White, fontFamily = FontFamily.Cursive,
+        Text(text = " Inven3 Manager", fontWeight = FontWeight.Bold,
+            fontSize = 35.sp,color = Color.Black, fontFamily = FontFamily.Cursive,
             modifier = Modifier.padding(20.dp)
 
         )
 
-        Image(painter = painterResource(id = R.drawable.inventory),
-            contentDescription = "",
+        Icon(
+            imageVector = Icons.Default.ShoppingCart,
+            tint = Color.Green,
+            contentDescription = "Safer way to manage inventory",
             modifier = Modifier
-                .width(200.dp)
-                .height(200.dp))
+                .width(100.dp)
+                .height(100.dp))
 
 
     }
